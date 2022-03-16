@@ -16,7 +16,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as { slug: string };
   const product = products.find((item) => item.url === slug);
-  console.log(product);
 
   return { props: { ...product } };
 };
