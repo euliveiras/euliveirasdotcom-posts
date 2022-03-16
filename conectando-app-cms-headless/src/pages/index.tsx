@@ -8,6 +8,7 @@ type HomeProps = {
     description: string;
     image: string;
     price: number;
+    url: string;
   }[];
 };
 
@@ -21,7 +22,7 @@ const Home: NextPage<HomeProps> = ({ results }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async (ctx) => {
   const ApiClient = ConnectToClient();
   const { results } = await ApiClient.getAll();
   return { props: { results } };
