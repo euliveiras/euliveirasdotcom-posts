@@ -13,7 +13,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const productsPaths = products
     .slice(1)
     .map((product) => ({ params: { slug: product.url } }));
-    console.log(productsPaths)
   return { paths: [...productsPaths], fallback: true };
 };
 
