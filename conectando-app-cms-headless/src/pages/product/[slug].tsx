@@ -10,7 +10,11 @@ const Product: React.FC<ProductProps> = ({ name }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [{ params: { slug: "" } }], fallback: true };
+  const productsPaths = products
+    .slice(1)
+    .map((product) => ({ params: { slug: product.url } }));
+    console.log(productsPaths)
+  return { paths: [...productsPaths], fallback: true };
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
