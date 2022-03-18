@@ -1,4 +1,12 @@
-export const products = [
+export type IProduct = {
+  name: string;
+  price: number;
+  description: string;
+  image: string;
+  url: string;
+};
+
+export const products: IProduct[] = [
   {
     name: "Aspirador de pó",
     price: 800,

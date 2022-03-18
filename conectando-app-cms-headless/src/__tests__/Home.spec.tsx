@@ -17,6 +17,9 @@ jest.spyOn(MockedCMService, "ConnectToClient").mockImplementation(() => ({
   async getAll() {
     return { results: mockedProducts };
   },
+  async getSingle() {
+    return {} as any;
+  },
 }));
 
 describe("Home", () => {

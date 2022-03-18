@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import { ConnectToClient } from "../../services/CMService";
 import { products } from "../../utils/products";
 
 type ProductProps = {
@@ -10,17 +11,20 @@ const Product: React.FC<ProductProps> = ({ name }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const productsPaths = products
-    .slice(1)
-    .map((product) => ({ params: { slug: product.url } }));
+  const ApiClient = ConnectToClient();
+  const { results } = await ApiClient.getAll();
+  const productsPaths = results.map((product) => ({
+    params: { slug: product.url },
+  }));
   return { paths: [...productsPaths], fallback: true };
 };
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as { slug: string };
-  const product = products.find((item) => item.url === slug);
+  const ApiClient = ConnectToClient();
+  const { results } = await ApiClient.getSingle(slug);
 
-  return { props: { ...product } };
+  return { props: { results } };
 };
 
 export default Product;
